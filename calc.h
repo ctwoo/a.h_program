@@ -34,7 +34,6 @@ struct response_t {
 //
 // Inputs:
 //  - Air temperature (deg C)
-//  - Dewpoint temperature (deg C)
 //
 // Output:
 //  - Absolute humidity (kg / m**3)
