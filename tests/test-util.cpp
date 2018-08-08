@@ -67,3 +67,29 @@ SCENARIO ("Check if json_header works") {
     }
 
 }
+
+SCENARIO ( "Test whether decode function works properly" ) {
+    std::string expected = "hello world";
+    std::string test_string = "hello%20world";
+    WHEN ( "Decode is given an encoded 'space' character" ) {
+        THEN( "Decode should convert %20 to a 'space' character" ) {
+            CHECK(expected == decode(test_string));
+        }
+    }
+
+    expected = "{correct}";
+    test_string = "%7Bcorrect%7D";
+    WHEN( "Decode is given a set of encoded braces") {
+        THEN( "A set of braces should be returned" ) {
+            CHECK(expected == decode(test_string));
+        }
+    }
+
+    expected = "|[]\\^=<>;':\"+,/?@#$%^&";
+    test_string = "%7C%5B%5D%5C%5E%3D%3C%3E%3B%27%3A%22%2B%2C%2F%3F%40%23%24%25%5E%26";
+    WHEN( "Decode is provided a list of most encoded URL characters" ) {
+        THEN( "Decode should return the correct output" ) {
+            CHECK(expected == decode(test_string));
+        }
+    }
+}
